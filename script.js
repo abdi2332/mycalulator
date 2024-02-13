@@ -16,7 +16,8 @@ function calculate(parts){
         let[num1,operand,num2]=parts
         num1=Number(num1)
         num2=Number(num2)
-        switch(operand){
+
+       switch(operand){
             case '+':
                 answer.innerHTML=num1+num2
                 break
@@ -47,7 +48,7 @@ function calculate(parts){
     function savedata(){
       localStorage.setItem("data",answer.innerHTML)
   }
-
+ 
 
     window.addEventListener("load", function(){
       const saveData=localStorage.getItem("data")
@@ -55,3 +56,17 @@ function calculate(parts){
         answer.innerHTML=saveData
       }
     })
+
+    document.getElementById("delete").addEventListener("click",deleteLast)
+    function deleteLast() {
+      let display = document.getElementById("screen");
+      // Get the current value from the display
+      let currentValue = display.value;
+      // Remove the last character
+      let newValue = currentValue.slice(0, -1);
+      // Update the display with the new value
+      display.value = newValue;
+      // Update the calculation
+      let parts = newValue.match(/[+\-*/]|\d+/g);
+      calculate(parts);
+  }
