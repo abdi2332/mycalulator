@@ -1,13 +1,43 @@
-
-
-
-let p = document.querySelectorAll("button");
+let p = document.querySelectorAll(".number");
 p.forEach((btn) =>
   btn.addEventListener("click", (e) => {
-    let display = document.getElementById("inner");
-    display.innerHTML += e.target.innerHTML;
+   let display = document.getElementById("screen");
+    display.value += e.target.innerHTML;
+    let parts = display.value.match(/[+\-*/]|\d+/g);
+    calculate(parts)
   })
 );
-function Add(){
-    
-}
+
+let answer=document.getElementById("result")
+
+
+function calculate(parts){
+    if(parts.length===3){
+        let[num1,operand,num2]=parts
+        num1=Number(num1)
+        num2=Number(num2)
+        switch(operand){
+            case '+':
+                answer.innerHTML=num1+num2
+                break
+            case '-':
+                answer.innerHTML= num1-num2
+                break
+            case '*':
+                answer.innerHTML= num1*num2
+                break
+            case '/':
+                answer.innerHTML=num1/num2
+                break
+            default:
+                answer.innerHTML="error"
+        }
+    }
+    else {
+        answer.innerHTML = "";
+    }
+    }
+    function clean(){
+    answer.innerHTML=""
+    document.getElementById("screen").value=""
+    }
