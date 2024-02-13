@@ -36,8 +36,22 @@ function calculate(parts){
     else {
         answer.innerHTML = "";
     }
+    savedata()
+    
     }
     function clean(){
     answer.innerHTML=""
     document.getElementById("screen").value=""
     }
+
+    function savedata(){
+      localStorage.setItem("data",answer.innerHTML)
+  }
+
+
+    window.addEventListener("load", function(){
+      const saveData=localStorage.getItem("data")
+      if(saveData){
+        answer.innerHTML=saveData
+      }
+    })
